@@ -86,11 +86,41 @@ def playComputer():
                 return board
 
 def printBoard():
-    print()
-    print("Playfield for this turn:")
-    print(board[0])
-    print(board[1])
-    print(board[2])
+    print("\nPlayfield for this turn:\n")
+
+    # row 0
+    newChar = ""
+    for char in board[0]:
+        if char == 0:
+            newChar += ". "
+        if char == 1:
+            newChar += "o "
+        if char == 9:
+            newChar += "x "
+    print("  ", newChar)
+
+    # row 1
+    newChar = ""
+    for char in board[1]:
+        if char == 0:
+            newChar += ". "
+        if char == 1:
+            newChar += "o "
+        if char == 9:
+            newChar += "x "
+    print("  ", newChar)
+
+    # row 2
+    newChar = ""
+    for char in board[2]:
+        if char == 0:
+            newChar += ". "
+        if char == 1:
+            newChar += "o "
+        if char == 9:
+            newChar += "x "
+    print("  ", newChar)
+
     print()
 
 def checkRows():
