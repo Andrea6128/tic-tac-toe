@@ -52,8 +52,31 @@ def setBoard():
 
 def playHuman():
     print("Human's turn:")
-    humanInputRow = int(input("Input row (0-2): "))
-    humanInputCol = int(input("Input col (0-2): "))
+    def inputRow():
+        global humanInputRow
+        try:
+            humanInputRow = int(input("Input row (0-2): "))
+            if humanInputRow < 0 or humanInputRow > 2:
+                print("Please input correct value (0-2)!\n")
+                inputRow()
+        except ValueError:
+            print("Please input correct value (0-2)!\n")
+            inputRow()
+
+    def inputCol():
+        global humanInputCol
+        try:
+            humanInputCol = int(input("Input col (0-2): "))
+            if humanInputCol < 0 or humanInputCol > 2:
+                print("Please input correct value (0-2)!\n")
+                inputCol()
+        except ValueError:
+            print("Please input correct value (0-2)!\n")
+            inputCol()
+
+    inputRow()
+    inputCol()
+
     for row in range(3):
         for col in range(3):
             if board[humanInputRow][humanInputCol] == 9:
