@@ -1,6 +1,6 @@
 # tic tac toe
 
-from random import random, randint
+from random import randint
 
 
 board = []
@@ -80,11 +80,9 @@ def playComputer():
     for row in range(3):
         for col in range(3):
             if board[computerInputRow][computerInputCol] == 9:
-                print("computer hit its own position and plays again")
                 playComputer()
                 return board
             elif board[computerInputRow][computerInputCol] == 1:
-                print("computer hit human's position and plays again")
                 playComputer()
                 return board
             elif board[computerInputRow][computerInputCol] == 0:
@@ -202,6 +200,7 @@ def checkDiags():
         looseGame("Computer has 999 in a diag \\ !")
         gameOver()
 
+# main loop
 init()
 setBoard()
 while game == True:
@@ -211,6 +210,5 @@ while game == True:
     checkCols()
     checkDiags()
     printBoard()
-    # print("game: ", game)
 else:
     print("Bye!\n")
