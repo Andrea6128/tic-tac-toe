@@ -91,7 +91,7 @@ def playComputer():
 
 def printBoard():
     print("\nPlayfield for this turn:\n")
-
+    print("   0 1 2")
     # row 0
     newChar = ""
     for char in board[0]:
@@ -101,7 +101,7 @@ def printBoard():
             newChar += "o "
         if char == 9:
             newChar += "x "
-    print("  ", newChar)
+    print("0:", newChar)
 
     # row 1
     newChar = ""
@@ -112,7 +112,7 @@ def printBoard():
             newChar += "o "
         if char == 9:
             newChar += "x "
-    print("  ", newChar)
+    print("1:", newChar)
 
     # row 2
     newChar = ""
@@ -123,7 +123,7 @@ def printBoard():
             newChar += "o "
         if char == 9:
             newChar += "x "
-    print("  ", newChar)
+    print("2:", newChar)
 
     print()
 
