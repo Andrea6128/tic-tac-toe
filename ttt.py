@@ -6,7 +6,11 @@ from random import random, randint
 board = []
 game = True
 
-print()
+def init():
+    print("\n*********************")
+    print("***  TIC TAC TOE  ***")
+    print("*********************")
+    print("   (c) 2020 aki\n")
 
 def winGame(message):
     print()
@@ -47,8 +51,9 @@ def setBoard():
 
 
 def playHuman():
-    humanInputRow = int(input("Row (0-2): "))
-    humanInputCol = int(input("Col (0-2): "))
+    print("Human's turn:")
+    humanInputRow = int(input("Input row (0-2): "))
+    humanInputCol = int(input("Input col (0-2): "))
     for row in range(3):
         for col in range(3):
             if board[humanInputRow][humanInputCol] == 9:
@@ -68,9 +73,10 @@ def playHuman():
                 return board
 
 def playComputer():
+    print("\nComputer's turn:")
     computerInputRow = randint(0, 2)
     computerInputCol = randint(0, 2)
-    print("Computer played: Row =", computerInputRow, "Col =", computerInputCol)
+    print("Row =", computerInputRow, ", Col =", computerInputCol)
     for row in range(3):
         for col in range(3):
             if board[computerInputRow][computerInputCol] == 9:
@@ -196,6 +202,7 @@ def checkDiags():
         looseGame("Computer has 999 in a diag \\ !")
         gameOver()
 
+init()
 setBoard()
 while game == True:
     playHuman()
