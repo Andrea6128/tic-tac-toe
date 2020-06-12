@@ -1,7 +1,13 @@
 # tic tac toe
 
+import os, sys
 from random import randint
 from colors import Colors
+
+
+# if running on windows, set colors for that
+if sys.platform.lower() == "win32":
+    os.system('color')
 
 board = []
 game = True
@@ -30,6 +36,11 @@ def looseGame(message):
 def gameOver():
     global game
     print(Colors.bg.red, Colors.fg.yellow, "*** GAME OVER! ***", Colors.reset)
+    game = False
+    return game
+
+def notGameOver():
+    global game
     game = False
     return game
 
@@ -69,6 +80,7 @@ def playHuman():
 
     def inputCol():
         global humanInputCol
+
         try:
             humanInputCol = int(input("Col (0-2): "))
             if humanInputCol < 0 or humanInputCol > 2:
@@ -84,13 +96,13 @@ def playHuman():
     for row in range(3):
         for col in range(3):
             if board[humanInputRow][humanInputCol] == 9:
-                print(Colors.fg.red, "--> You can't place your stone onto computer's position!")
+                print(Colors.fg.red, "\n--> You can't place your stone onto computer's position!")
                 print(" --> Please try again...\n", Colors.reset)
                 printBoard()
                 playHuman()
                 return board
             if board[humanInputRow][humanInputCol] == 1:
-                print(Colors.fg.red, "--> You can't place your stone onto your own position!")
+                print(Colors.fg.red, "\n--> You can't place your stone onto your own position!")
                 print(" --> Please try again...\n", Colors.reset)
                 printBoard()
                 playHuman()
@@ -103,7 +115,13 @@ def playHuman():
 def playComputer():
     computerInputRow = randint(0, 2)
     computerInputCol = randint(0, 2)
-    print(Colors.fg.red, "--> Computer's turn: [x]", Colors.fg.lightwhite, "Row =", computerInputRow, ", Col =", computerInputCol)
+
+    if 0 not in board[0] and 0 not in board[1] and 0 not in board[2]:
+        printBoard()
+        print(Colors.fg.lightcyan, "*** It's a DRAW GAME! ***")
+        print(Colors.reset)
+        sys.exit()
+
     for row in range(3):
         for col in range(3):
             if board[computerInputRow][computerInputCol] == 9:
@@ -114,6 +132,7 @@ def playComputer():
                 return board
             elif board[computerInputRow][computerInputCol] == 0:
                 board[computerInputRow][computerInputCol] = 9
+                print(Colors.fg.red, "--> Computer's turn: [x]", Colors.fg.lightwhite, "Row =", computerInputRow, ", Col =", computerInputCol)
                 return board
 
 def printBoard():
@@ -157,74 +176,74 @@ def printBoard():
 def checkRows():
     # human
     if board[0] == [1,1,1]:
-        winGame("You have three in a row 0!")
-        gameOver()
+        winGame("You have three in a row 0 [-] (horizontal)")
+        notGameOver()
 
     if board[1] == [1,1,1]:
-        winGame("You have three in a row 1!")
-        gameOver()
+        winGame("You have three in a row 1 [-] (horizontal)")
+        notGameOver()
 
     if board[2] == [1,1,1]:
-        winGame("You have three in a row 2!")
-        gameOver()
+        winGame("You have three in a row 2 [-] (horizontal)")
+        notGameOver()
 
     # computer
     if board[0] == [9,9,9]:
-        winGame("Computer has three in a row 0!")
+        winGame("Computer has three in a row 0 [-] (horizontal)")
         gameOver()
 
     if board[1] == [9,9,9]:
-        winGame("Computer has three in a row 1!")
+        winGame("Computer has three in a row 1 [-] (horizontal)")
         gameOver()
 
     if board[2] == [9,9,9]:
-        winGame("Computer has three in a row 2!")
+        winGame("Computer has three in a row 2 [-] (horizontal)")
         gameOver()
 
 def checkCols():
     # human
     if board[0][0] == 1 and board[1][0] == 1 and board[2][0] == 1:
-        winGame("You have three in a col | 0!")
-        gameOver()
+        winGame("You have three in a col 0 [|] (vertical)")
+        notGameOver()
 
     if board[0][1] == 1 and board[1][1] == 1 and board[2][1] == 1:
-        winGame("You have three in a col | 1!")
-        gameOver()
+        winGame("You have three in a col 1 [|] (vertical)")
+        notGameOver()
 
     if board[0][2] == 1 and board[1][2] == 1 and board[2][2] == 1:
-        winGame("You have three in a col | 2!")
-        gameOver()
+        winGame("You have three in a col 2 [|] (vertical)")
+        notGameOver()
 
     # computer
     if board[0][0] == 9 and board[1][0] == 9 and board[2][0] == 9:
-        looseGame("Computer has three in a col | 0!")
+        looseGame("Computer has three in a col 0 [|] (vertical)")
         gameOver()
 
     if board[0][1] == 9 and board[1][1] == 9 and board[2][1] == 9:
-        looseGame("Computer three 999 in a col | 1!")
+        looseGame("Computer three 999 in a col 1 [|] (vertical)")
         gameOver()
 
     if board[0][2] == 9 and board[1][2] == 9 and board[2][2] == 9:
-        looseGame("Computer has three in a col | 2!")
+        looseGame("Computer has three in a col 2 [|] (vertical)")
         gameOver()
 
 def checkDiags():
     # human
     if board[0][0] == 1 and board[1][1] == 1 and board[2][2] == 1:
-        winGame("You have three in a diag \\!")
-        gameOver()
+        winGame("You have three in a diag [\\]")
+        notGameOver()
 
     if board[0][2] == 1 and board[1][1] == 1 and board[2][0] == 1:
-        winGame("You have three in a diag /!")
-        gameOver()
+        winGame("You have three in a diag [/]")
+        notGameOver()
 
     # computer
     if board[0][2] == 9 and board[1][1] == 9 and board[2][0] == 9:
-        looseGame("Computer has three in a diag / !")
+        looseGame("Computer has three in a diag [/]")
         gameOver()
 
     if board[0][0] == 9 and board[1][1] == 9 and board[2][2] == 9:
-        looseGame("Computer has three in a diag \\ !")
+        looseGame("Computer has three in a diag [\\]")
         gameOver()
 
 # main loop

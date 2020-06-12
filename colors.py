@@ -1,10 +1,3 @@
-import os, sys
-
-
-# if running on windows, set colors for that
-if sys.platform.lower() == "win32":
-    os.system('color')
-
 class Colors:
     reset='\033[0m'
     bold='\033[01m'
